@@ -363,14 +363,14 @@ void keyboardBack(int key,int event) {
 
 }
 
-void mouseBack() {
+void mouseBack(int x,int y,int button,int event) {
 	
 }
 
 
 int Setup() {
 //	initConsole();
-	initWindow("my caculator",DEFAULT,DEFAULT,200,350);
+	initWindow("my caculator",DEFAULT,DEFAULT,500,550);
 	
 	registerKeyboardEvent(keyboardBack);
 	registerMouseEvent(mouseBack);
@@ -391,7 +391,10 @@ int Setup() {
 	paintText(7,70,out);
 		
 	/*END of 显示运算部分 */
-	setPenWidth(2);
+	setBrushColor(MYGRAY);
+	rectangle(0,150,200,350);
+	setPenWidth(1);
+	setPenStyle(PS_SOLID);
 	setPenColor(BLACK);
 	/*横线*/
 	line(0,150,200,150);
@@ -423,6 +426,11 @@ int Setup() {
 	paintText(115,215,"6");
 	paintText(115,265,"3");
 		
+	ACL_Image keyboard;
+	loadImage("keyboard222.jpg",&keyboard);
+	putImage(&keyboard,0,150);
+//	putImageScale(&keyboard,0,150,200,200);
+	
 	endPaint();
 	
 	return 0;

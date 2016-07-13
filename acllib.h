@@ -59,6 +59,11 @@ Be sure to change the leading folders as your installation.
 #define WHITE			RGB(255, 255, 255)
 #define GRAY			RGB(205, 205, 205)
 
+
+#define MYYELLOW			RGB(249,140,17)
+#define MYGRAY			RGB(195,195,195)
+#define MYLIGHTGRAY			RGB(180,180,180)
+
 #define EMPTY				0xffffffff
 #define DEFAULT				-1
 
