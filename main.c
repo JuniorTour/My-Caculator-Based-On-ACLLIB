@@ -51,6 +51,105 @@ void activePaint() {	/*Ò»¿ªÊ¼»¹ÒÔÎªÒ»¸öÏÔÊ¾º¯Êı¾Í¹»ÁË£¬½á¹ûµ½×îºóÕâ¸öº¯ÊıÒÑ¾­±»·
 	endPaint();
 } 
 
+void paintMain() {
+	beginPaint();
+	/*ÏÔÊ¾ÔËËã²¿·Ö:*/
+	setPenColor(GRAY);
+	setPenStyle(PS_DASH);
+	line(0,50,200,50);
+		
+	/*END of ÏÔÊ¾ÔËËã²¿·Ö */
+	
+	/*±¾À´ÏëÉèÖÃÒ»¸ö±³¾°£¬·¢ÏÖ×Ö·û´øÓĞ°×±ß....*/
+//	setBrushColor(MYGRAY);
+//	rectangle(0,150,200,350);
+
+	/*ÖØ»æ½çÃæÊ±£¬ÓÃ°×É«·½¿éÕÚ¸Ç¡£*/
+	setPenColor(WHITE);
+	setBrushColor(WHITE);
+	rectangle(0,150,200,350);
+	
+	/*ºáÏß*/
+	setPenWidth(1);
+	setPenStyle(PS_SOLID);
+	setPenColor(BLACK);
+	line(0,150,200,150);
+	line(0,200,200,200);
+	line(0,250,200,250);
+	line(0,300,200,300);
+	/*ÊúÏß*/
+	line(50,150,50,350);
+	line(100,150,100,300);
+	line(150,150,150,350);
+	line(200,150,200,350);
+	/*Êı×Ö¼°·ûºÅ*/
+	setTextSize(30);
+	setTextFont("microsoft yahei");
+	
+	paintText(170,160,"/");
+	paintText(170,210,"*");
+	paintText(170,260,"-");
+	paintText(170,310,"+");
+	paintText(90,310,"£½");
+	paintText(15,165,"7");
+	paintText(15,215,"4");
+	paintText(15,265,"1");
+	paintText(15,315,"0");
+	paintText(65,165,"8");
+	paintText(65,215,"5");
+	paintText(65,265,"2");
+	paintText(115,165,"9");
+	paintText(115,215,"6");
+	paintText(115,265,"3");
+	
+	
+	/*ÍËÎ»°´Å¥£¬ÖØ»æ½çÃæÊ±ÒàÓÃ°×¿éÕÚ¸Ç¡£*/
+	setPenColor(WHITE);
+	setBrushColor(WHITE);
+	rectangle(150,0,200,50);
+	
+	setPenColor(BLACK);
+	line(150,0,150,50);
+	paintText(158,7,"<-");
+	
+	/*ËÆºõÕâ¸ö¿â¼ÓÔØÍ¼Æ¬µÄÖÊÁ¿·Ç³£²»ºÃ£¬¹Ê·ÅÆúÁË¡£*/	
+//	ACL_Image keyboard;
+//	loadImage("keyboard222.jpg",&keyboard);
+//	putImage(&keyboard,0,150);
+//	putImageScale(&keyboard,0,150,200,200);
+	
+	endPaint();
+} 
+
+
+void timeListen(int id) {
+	static cnt=0;
+//	printf("		cnt=%d\n",cnt);
+	cnt++;
+	
+	if (cnt==2) {
+		paintMain();
+		/*0.2sÊ±¼äÒ»µ½£¬ÖØĞÂ»æÖÆÖ÷½çÃæ£¬´Ó¶øĞÎ³É°´ÏÂµÄĞ§¹û¡£*/
+		cancelTimer(0);
+		cnt=0;
+	}
+}
+
+void paintPressedButton(int left,int top,int right,int bottom) {
+	beginPaint();
+	setBrushColor(MYGRAY);
+	rectangle(left,top,right,bottom);
+	endPaint();
+	
+	startTimer(0,100);
+	/*ÎÒÕæÊÇ»úÖÇ£¡£¡·¢ÏÖÁË¿ÉÒÔ´Ó±ğµÄµØ·½¿ªÊ¼¼ÆÊ±£¡*/
+	
+	/*ÒòÎª°´ÏÂµÄĞ§¹ûÊÇÒ»Ë²¼äµÄ£¬ËùÒÔ³¢ÊÔÊ¹ÓÃ½ô½Ó×Åµ÷ÓÃ»æÖÆÖ÷½çÃæµÄº¯Êı£¬
+	À´ÊµÏÖÕâ¸öĞ§¹û¡£*/
+//	paintMain();
+	/*ÕâÑù×öÊµÏÖ²»ÁË¡£½çÃæ»æÖÆÊÇË²¼äÍê³ÉµÄ¡£*/
+}
+
 int getPlaceOfPara(int in_para) {
 	int place=0;
 	int temp_para=in_para;
@@ -87,7 +186,7 @@ void paintPastProcess() {
 	
 	setPenColor(WHITE);
 	setBrushColor(WHITE);
-	rectangle(0,5,200,45);
+	rectangle(0,5,150,45);
 	
 	setTextFont("microsoft yahei");
 	setTextSize(30);
@@ -148,6 +247,11 @@ void paintOutcome() {
 	endPaint();
 	
 	outcome_painted=1; 	//´ò¿ª½á¹ûÒÑÏÔÊ¾¿ª¹Ø 
+	
+	/*½«¸÷²ÎÊı¹éÁã£¬ÖØĞÂ¿ªÊ¼ĞÂÒ»ÂÖÔËËã¡£*/
+	para1=0;
+	para2=0; 
+	switch_sign=0; 
 }
 
 void paintSign() {
@@ -187,8 +291,6 @@ void paintSign() {
 		
 	}
 }
-
-
 
 void backspace() {
 	
@@ -316,6 +418,7 @@ int cal(int input) {
 }
 
 void keyboardBack(int key,int event) {
+//	printf("key=%d\n",key);
 	if (event==0)
 	printf("key=%d,event=%d\n",key,event);
 	
@@ -364,74 +467,110 @@ void keyboardBack(int key,int event) {
 }
 
 void mouseBack(int x,int y,int button,int event) {
+//	printf("x=%d,y=%d,b=%d,e=%d\n",x,y,button,event);
+	/*Ë¼Â·ÊÇ£ºÓÃxy×ø±ê»®·Ö³ö¸÷¸ö¼ü£¬°´ÏÂÒ»¸ö¼ü¾Í°ÑÏàÓ¦µÄ¡°¼üÖµ¡±£¬
+	Ò²¾ÍÊÇÕâ¸öinput´«¸øcal()º¯Êı¡£ */
+	/*×ó¼üÊÇbutton=1£¬°´ÏÂÊÇevent=0£¬µ¯ÆğÊÇevent=0¡£*/
 	
+	if (event==0) {
+		if (x>=0&&x<=50&&y>=150&&y<=200) {
+			paintPressedButton(0,150,50,200);
+			cal(103);//7
+		}
+		if (x>=0&&x<=50&&y>=201&&y<=250) {
+			paintPressedButton(0,200,50,250);
+			cal(100);//4
+		}
+		if (x>=0&&x<=50&&y>=250&&y<=300) {
+			paintPressedButton(0,250,50,300);
+			cal(97);//1
+		}
+		if (x>=0&&x<=50&&y>=300&&y<=350) {
+			paintPressedButton(0,300,50,350);
+			cal(96);//0
+		}
+		if (x>=50&&x<=100&&y>=150&&y<=200) {
+			paintPressedButton(50,150,100,200);
+			cal(104);//8
+		}
+		if (x>=50&&x<=100&&y>=201&&y<=250) {
+			paintPressedButton(50,200,100,250);
+			cal(101);//5
+		}
+		if (x>=50&&x<=100&&y>=251&&y<=300) {
+			paintPressedButton(50,250,100,300);
+			cal(98);//2
+		}
+		if (x>=100&&x<=150&&y>=150&&y<=200) {
+			paintPressedButton(100,150,150,200);
+			cal(105);//9
+		}
+		if (x>=100&&x<=150&&y>=201&&y<=250) {
+			paintPressedButton(100,200,150,250);
+			cal(102);//6
+		}
+		if (x>=100&&x<=150&&y>=251&&y<=300) {
+			paintPressedButton(100,250,150,300);
+			cal(99);//3
+		}
+		
+		if (x>=151&&x<=200&&y>=150&&y<=350){
+			if (y>=150&&y<=200){
+				cal(111);//³ı 
+				paintPressedButton(150,150,200,200);
+			}
+			if (y>=200&&y<=250){
+				cal(106);//³Ë 
+				paintPressedButton(150,200,200,250);
+			}
+			if (y>=250&&y<=300){
+				cal(109);//¼õ 
+				paintPressedButton(150,250,200,300);
+			}
+			if (y>=300&&y<=350){
+				cal(107);//¼Ó 
+				paintPressedButton(150,300,200,350);
+			}
+		} 
+		
+		if (x>=150&&x<=200&&y>=0&&y<=50) {
+			cal(8);//ÍËÎ»¼ü
+			backspace();
+			paintPressedButton(150,0,200,50);
+		}
+		
+		/*Ö»ÓĞ°´ÏÂÊ±²Å´òÓ¡¡£*/
+		paintProcess();
+		paintSign();
+		if (x>=50&&x<=150&&y>=301&&y<=350) {
+			paintPressedButton(50,300,150,350);
+			cal(13);//µÈÓÚºÅ,»Ø³µ¼ü 
+			paintPastProcess();
+			paintOutcome();
+		} 
+	}
 }
 
 
 int Setup() {
 //	initConsole();
-	initWindow("my caculator",DEFAULT,DEFAULT,500,550);
+	initWindow("My Caculator",DEFAULT,DEFAULT,200,350);
 	
 	registerKeyboardEvent(keyboardBack);
 	registerMouseEvent(mouseBack);
+	registerTimerEvent(timeListen);
 	
-	
-	/*¼¸ºõ±£³Ö²»±äµÄÖ÷½çÃæ,ÈÕºó¿¼ÂÇµ½¼ÓÒ»Ğ©ÌØĞ§µÄ»°£¬
-	¿ÉÄÜ»á¶ÀÁ¢³ÉÒ»¸öº¯Êı£¬ÓÃÓÚÖØ»æ½çÃæ¡£*/
 	beginPaint();
-	/*ÏÔÊ¾ÔËËã²¿·Ö:*/
-	setPenColor(GRAY);
-	setPenStyle(PS_DASH);
-	line(0,50,200,50);
-	
-	/*³õÊ¼µÄ0*/
+	/*³õÊ¼µÄ0,Õâ¸öÁã²»»áÖØ¸´¶à´Î³öÏÖ£¬ËùÒÔ´ÓpaintMainÖĞ¶ÀÁ¢³öÀ´ÁË¡£*/
 	setTextFont("microsoft yahei");
 	setTextSize(60);
 	setTextColor(BLACK);
 	paintText(7,70,out);
-		
-	/*END of ÏÔÊ¾ÔËËã²¿·Ö */
-	setBrushColor(MYGRAY);
-	rectangle(0,150,200,350);
-	setPenWidth(1);
-	setPenStyle(PS_SOLID);
-	setPenColor(BLACK);
-	/*ºáÏß*/
-	line(0,150,200,150);
-	line(0,200,200,200);
-	line(0,250,200,250);
-	line(0,300,200,300);
-	/*ÊúÏß*/
-	line(50,150,50,350);
-	line(100,150,100,300);
-	line(150,150,150,350);
-	line(200,150,200,350);
-	/*Êı×Ö¼°·ûºÅ*/
-	setTextSize(30);
-	setTextFont("microsoft yahei");
-	
-	paintText(170,160,"/");
-	paintText(170,210,"*");
-	paintText(170,260,"-");
-	paintText(170,310,"+");
-	paintText(90,310,"£½");
-	paintText(15,165,"7");
-	paintText(15,215,"4");
-	paintText(15,265,"1");
-	paintText(15,315,"0");
-	paintText(65,165,"8");
-	paintText(65,215,"5");
-	paintText(65,265,"2");
-	paintText(115,165,"9");
-	paintText(115,215,"6");
-	paintText(115,265,"3");
-		
-	ACL_Image keyboard;
-	loadImage("keyboard222.jpg",&keyboard);
-	putImage(&keyboard,0,150);
-//	putImageScale(&keyboard,0,150,200,200);
-	
 	endPaint();
+	
+	/*¼¸ºõ±£³Ö²»±äµÄÖ÷½çÃæ,ÈÕºó¿¼ÂÇµ½¼ÓÒ»Ğ©ÌØĞ§µÄ»°£¬
+	¿ÉÄÜ»á¶ÀÁ¢³ÉÒ»¸öº¯Êı£¬ÓÃÓÚÖØ»æ½çÃæ¡£*/
+	paintMain();
 	
 	return 0;
 }
